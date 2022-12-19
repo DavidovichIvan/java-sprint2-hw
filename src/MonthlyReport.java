@@ -7,11 +7,23 @@ public class MonthlyReport {
     /**
      * HashMaps for separated storing data (read from file) about monthly income/outcome
      */
-    HashMap<String, Integer[]> income = new HashMap<>(); //ХТ для записи доходов, ключ - номер месяца
+    HashMap<String, Integer[]> income = new HashMap<>();
 
-    HashMap<String, Integer[]> outcome = new HashMap<>(); //ХТ для записи расходов, ключ - номер месяца
+    HashMap<String, Integer[]> outcome = new HashMap<>();
 
-    Map<Integer, String> monthName = Map.ofEntries(entry(1, "Январь"), entry(2, "Февраль"), entry(3, "Март"), entry(4, "Апрель"), entry(5, "Май"), entry(6, "Июнь"), entry(7, "Июль"), entry(8, "Август"), entry(9, "Сентябрь"), entry(10, "Октябрь"), entry(11, "Ноябрь"), entry(12, "Декабрь"));
+    Map<Integer, String> monthName = Map.ofEntries(
+            entry(1, "Январь"),
+            entry(2, "Февраль"),
+            entry(3, "Март"),
+            entry(4, "Апрель"),
+            entry(5, "Май"),
+            entry(6, "Июнь"),
+            entry(7, "Июль"),
+            entry(8, "Август"),
+            entry(9, "Сентябрь"),
+            entry(10, "Октябрь"),
+            entry(11, "Ноябрь"),
+            entry(12, "Декабрь"));
 
     /**
      * method for reading data from all monthly report files
@@ -63,7 +75,7 @@ public class MonthlyReport {
                 } else if (lineContents[1].equalsIgnoreCase("true")) {
                     mReport.outcome.put(key, monthlyValues);
                 } else {
-                    System.out.println("Ошибка в исходных данных: невозможно определить, указанная в отчете сумма отнесена к доходам или расходам. Данные за " + i + " месяц не будут записаны. Проверьте правильность заполнения исходных данных в файле " + path);
+                    System.out.println("Данные за " + i + " месяц не будут записаны. Проверьте правильность исходных данных в файле " + path);
                 }
             }
             monthReports.add(mReport);
@@ -94,7 +106,7 @@ public class MonthlyReport {
                 System.out.println(val);
 
                 Integer[] inc = monthReport.income.get(val);
-                System.out.println("Реализовано " + inc[0] + " штук по " + inc[1] + " руб./штука. На общую сумму " + inc[0] * inc[1] + " рублей.");
+                System.out.println("Реализовано " + inc[0] + " штук по " + inc[1] + " руб./штука. на сумму " + inc[0] * inc[1] + " рублей.");
 
                 if ((inc[0] * inc[1]) > Sum) {
                     Sum = inc[0] * inc[1];
@@ -103,7 +115,7 @@ public class MonthlyReport {
             }
 
             System.out.println();
-            System.out.println("Самый прибыльный товар в этом месяце - это " + tovar + " всего реализовано на сумму " + Sum);
+            System.out.println("Самый прибыльный товар в этом месяце - это " + tovar + " реализовано на сумму " + Sum);
             System.out.println();
         }
 
@@ -120,7 +132,7 @@ public class MonthlyReport {
                 System.out.println(val);
 
                 Integer[] inc = monthReport.outcome.get(val);
-                System.out.println("Приобретено " + inc[0] + " штук по " + inc[1] + " руб./штука. На общую сумму " + inc[0] * inc[1] + " рублей.");
+                System.out.println("Приобретено " + inc[0] + " шт. по " + inc[1] + " руб./штука. На сумму " + inc[0] * inc[1] + " рублей.");
 
 
                 if ((inc[0] * inc[1]) > Sum) {
@@ -130,7 +142,7 @@ public class MonthlyReport {
             }
 
             System.out.println();
-            System.out.println("Наименование самой большой траты в этом месяце - " + tovar + ", всего потрачено " + Sum);
+            System.out.println("Самая большая трата в этом месяце - " + tovar + ", всего потрачено " + Sum);
             System.out.println();
 
         }

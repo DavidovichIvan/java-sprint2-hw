@@ -43,7 +43,8 @@ public class YearlyReport {
             } else if (lineContents[2].equalsIgnoreCase("true")) {
                 yReport.outcome.put(key, expenseAmount);
             } else {
-                System.out.println("Невозможно определить - сумма за " + lineContents[2] + " месяц в отчете относится к доходам или расходам. Проверьте исходные данные отчета и перезапустите программу.");
+                System.out.println("Невозможно определить сумма за " + lineContents[2] + " месяц относится к доходам или расходам. " +
+                                   "Проверьте исходные данные отчета и перезапустите программу.");
                 return;
             }
         }

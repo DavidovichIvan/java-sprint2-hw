@@ -22,7 +22,7 @@ public class Main {
          */
         String pathM = "C:\\Users\\Вуня\\Desktop\\dev\\second-sprint\\java-sprint2-hw\\resources\\m.";
 
-        System.out.println("Добро пожаловать в приложение -=*Черная бухгалтерия*=-. Выберите действие из списка:");
+        System.out.println("Приложение -=*Черная бухгалтерия*=-. Выберите действие из списка:");
 
         while (true) {
             showMenu();
@@ -77,7 +77,7 @@ public class Main {
             System.out.println("Считать все месячные отчёты.");
 
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Введите год, за который необходимо считать отчет в формате 'ГГГГ'. В настоящее время доступны отчеты только за 2021 год.");
+            System.out.println("Введите отчетный год в формате 'ГГГГ' (сейчас доступен только 2021 год).");
             String year = scanner.nextLine();
 
             monthReports = MonthlyReport.readMonthReport(pathM, year);
@@ -98,7 +98,7 @@ public class Main {
                 System.out.println("Cначала нужно считать годовые отчеты");
             } else {
                 System.out.println("Осуществляем сверку отчетных данных.");
-                DataValidation.dataValidation(monthReports, yReport);
+                System.out.println(DataValidation.consistencyCheck(monthReports, yReport));
             }
 
         } else if (menuItem.equals("4")) {
@@ -106,7 +106,7 @@ public class Main {
             if (monthReports == null) {
                 System.out.println("Cначала нужно считать месячные отчеты");
             } else {
-                System.out.println("Вывести информацию о всех месячных отчётах.");
+                System.out.println("Информация о месячных отчётах.");
                 MonthlyReport.monthStatistic(monthReports);
             }
 
@@ -119,15 +119,14 @@ public class Main {
                 yReport.averageInOut(yReport.income, yReport.outcome);
 
             } else
-                System.out.println("Отчетные данные не заполнены. Сначала выполните команду 'Считать годовой отчет'.");
+                System.out.println("Сначала необходимо считать годовой отчет.");
 
         } else {
-            System.out.println("Такой команды нет. Выберите номер команду от 1 до 5 или quit - для завершения работы.");
+            System.out.println("Введите номер команды от 1 до 5, quit - завершить работу.");
         }
         return monthReports;
     }
 
 }
 
-//Спасибо, Евгению (если Вы по-прежнему со мной) за работу.
-// Сложновато было для 3х недельного обучения, вероятно программистам время от времени нужна помощь психологов, а может и более серьезных специалистов )
+//Спасибо за работу.

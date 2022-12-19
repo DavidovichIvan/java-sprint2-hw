@@ -9,13 +9,14 @@ public class DataValidation {
      * @param monthReports - arraylist containing objects with an information from monthly reports
      * @param yReport      - object containing data from yearly report
      */
-    public static void dataValidation(ArrayList<MonthlyReport> monthReports, YearlyReport yReport) {
+    public static ArrayList<String> consistencyCheck(ArrayList<MonthlyReport> monthReports, YearlyReport yReport) {
         int j = 1;
         int sumOfMonthIncome;
         int sumOfMonthOutcome;
         int monthTotal;
         int yearTotal;
         boolean err = false;
+        ArrayList<String> consistencyCheckResult = new ArrayList<>();
 
         for (MonthlyReport monthReport : monthReports) {
             sumOfMonthIncome = 0;
@@ -36,20 +37,30 @@ public class DataValidation {
             monthTotal = sumOfMonthIncome - sumOfMonthOutcome;
             System.out.println("Сальдо за " + monthReport.monthName.get(j) + " по данным месячного отчета: " + monthTotal);
 
-            yearTotal = yReport.income.get(j) - yReport.outcome.get(j);
+             yearTotal = yReport.income.get(j) - yReport.outcome.get(j);
 
-            //    yearTotal = yReport.income.get(j) - yReport.outcome.get(j)+1; //строка для тестирования срабатывания ошибки, чтобы в исходники не лазить
+          // yearTotal = yReport.income.get(j) - yReport.outcome.get(j) + 1; //строка для тестирования срабатывания ошибки, чтобы в исходники не лазить
 
             System.out.println("Сальдо за " + monthReport.monthName.get(j) + " по данным годового отчета: " + yearTotal);
 
             if (yearTotal != monthTotal) {
-                System.out.println("ОШИБКА! Исходные данные за " + monthReport.monthName.get(j) + " в месячном и годовом отчетах не совпадают.");
                 err = true;
+                consistencyCheckResult.add("Данные за " + monthReport.monthName.get(j) + " не совпадают с годовым отчетом");
+
             }
             j++;
         }
         if (err == false) {
-            System.out.println("Сверка отчетных данных завершена успешно. Данные отчетов соответствуют друг другу.");
+
+            consistencyCheckResult.add("Сверка отчетных данных пройдена успешно.");
+
         }
+        return consistencyCheckResult;
     }
 }
+
+
+
+
+
+
